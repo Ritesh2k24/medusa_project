@@ -1,3 +1,10 @@
-"scripts": {
-  "start": "medusa start"
+{
+  "name": "medusa-server",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "medusa start"
+  },
+  "dependencies": {
+    "medusa": "^1.8.0"
+  }
 }
