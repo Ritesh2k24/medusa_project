@@ -38,7 +38,7 @@ jobs:
       id: render-task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: medusa-deployment/ecs-task-def-template.json
+        task-definition: medusa-deployment/ecs-task-def.json
         container-name: medusa
         image: ${{ secrets.AWS_ECR_URI }}:latest
 
