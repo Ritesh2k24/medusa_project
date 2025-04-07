@@ -62,7 +62,7 @@ resource "aws_route_table_association" "public" {
 
 # Allocate an Elastic IP for NAT
 resource "aws_eip" "nat" {
-  vpc = true
+  domain = "vpc"
 }
 
 # NAT Gateway in Public Subnet
