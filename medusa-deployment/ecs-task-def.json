@@ -8,7 +8,7 @@
   "containerDefinitions": [
     {
       "name": "medusa",
-      "image": "<IMAGE_URI>",
+      "image": "<IMAGE_NAME>",
       "essential": true,
       "portMappings": [
         {
