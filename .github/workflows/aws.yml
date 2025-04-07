@@ -1,4 +1,4 @@
-name: Deploy Medusa Backend
+name: Deployment of Medusa Backend
 
 on:
   push:
