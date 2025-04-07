@@ -21,7 +21,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
+        aws-region: ${{ secrets.AWS_REGION }}
 
     - name: Login to Amazon ECR
       run: |
@@ -34,10 +34,18 @@ jobs:
         docker build -t ${{ secrets.AWS_ECR_URI }}:$IMAGE_TAG ./medusa-deployment/medusa-server
         docker push ${{ secrets.AWS_ECR_URI }}:$IMAGE_TAG
 
-    - name: Deploy to ECS
+    - name: Render Amazon ECS task definition
+      id: render-task-def
+      uses: aws-actions/amazon-ecs-render-task-definition@v1
+      with:
+        task-definition: medusa-deployment/ecs-task-def-template.json
+        container-name: medusa
+        image: ${{ secrets.AWS_ECR_URI }}:latest
+
+    - name: Deploy to Amazon ECS
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
-        task-definition: medusa-deployment/ecs-task-def.json
+        task-definition: ${{ steps.render-task-def.outputs.task-definition }}
         service: medusa-service
         cluster: medusa-cluster
         wait-for-service-stability: true
