@@ -31,7 +31,7 @@ jobs:
     - name: Build and Push Docker Image
       run: |
         IMAGE_TAG=latest
-        docker build -t ${{ secrets.AWS_ECR_URI }}:$IMAGE_TAG ./medusa-server
+        docker build -t ${{ secrets.AWS_ECR_URI }}:$IMAGE_TAG ./medusa-deployment/medusa-server
         docker push ${{ secrets.AWS_ECR_URI }}:$IMAGE_TAG
 
     - name: Deploy to ECS
